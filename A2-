@@ -1,2 +1,19 @@
 #A2-RNA-Seq differential expression
+import pandas as pd
 
+data = {
+    "Gene": ["G1", "G2", "G3", "G4"],
+    "Control": [10, 20, 30, 40],
+    "Treated": [30, 10, 20, 80]
+}
+
+df = pd.DataFrame(data)
+
+df["Change"] = df["Treated"] - df["Control"]
+print(df)
+
+print("Upregulated Genes:")
+print(df[df["Change"] > 0]["Gene"])
+
+print("Downregulated Genes:")
+print(df[df["Change"] < 0]["Gene"])
