@@ -19,3 +19,127 @@ print(classification_report(y_te, rf.predict(X_te)))
 # Predictive features (the "markers")
 imp = pd.Series(rf.feature_importances_, index=data.feature_names)
 print(imp.sort_values(ascending=False).head(5))
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+CODE EXPLAINED
+1. Import libraries
+   load_breast_cancer loads the dataset; train_test_split splits the data; RandomForestClassifier and SVC are classification models; accuracy_score and classification_report evaluate predictions; pandas handles feature importance values.
+
+2. data = load_breast_cancer()
+   Loads the Breast Cancer Wisconsin diagnostic dataset built into scikit-learn. It contains numerical measurements derived from images of cell nuclei.
+
+3. data.data
+   Contains the input features. The dataset has 30 numerical features.
+
+4. data.target
+   Contains the target class labels: 0 = malignant and 1 = benign.
+
+5. train_test_split(..., test_size=0.2, random_state=42)
+   Splits the data into 80% training and 20% testing. random_state=42 makes the split reproducible. X_tr and y_tr are training features and labels; X_te and y_te are testing features and labels.
+
+6. RandomForestClassifier(100, random_state=42)
+   Creates a Random Forest containing 100 decision trees.
+
+7. .fit(X_tr, y_tr)
+   Trains the Random Forest using the training data.
+
+8. SVC(kernel="linear")
+   Creates a Support Vector Classifier with a linear kernel, which learns a linear decision boundary.
+
+9. svm.fit(X_tr, y_tr)
+   Trains the SVM model on the same training data.
+
+10. rf.predict(X_te) and svm.predict(X_te)
+    Generate predictions for the test dataset using each trained model.
+
+11. accuracy_score(y_te, ...)
+    Calculates the proportion of correct predictions by comparing predictions with actual test labels.
+
+12. classification_report(y_te, rf.predict(X_te))
+    Displays precision, recall, F1-score and support for each class for the Random Forest model.
+
+13. rf.feature_importances_
+    Provides an importance score for each input feature based on the fitted Random Forest.
+
+14. pd.Series(rf.feature_importances_, index=data.feature_names)
+    Creates a pandas Series pairing each importance score with its feature name.
+
+15. imp.sort_values(ascending=False).head(5)
+    Sorts feature importance scores from highest to lowest and displays the top five.
+
+PIPELINE:
+Load dataset -> separate features and labels -> split training and testing data -> train Random Forest and linear SVM -> predict test labels -> compare accuracy -> print Random Forest classification report -> rank important features.
+
+OUTPUT TO EXPECT:
+Random Forest accuracy, SVM accuracy, Random Forest precision/recall/F1 classification report, and the five features with the highest Random Forest importance scores. Exact results appear when the code is run.
+
+IMPORTANT NOTES:
+- Despite the assignment title, this code uses the Breast Cancer Wisconsin diagnostic dataset, not raw DNA sequences or gene-expression data.
+- Target labels are 0 = malignant and 1 = benign.
+- Feature importance indicates predictive usefulness within this fitted Random Forest; it does not prove biological causation or establish validated biomarkers.
+- The supplied SVM code does not scale features. SVM is sensitive to feature magnitudes, so StandardScaler in a Pipeline is commonly recommended.
+- The classification report is printed for Random Forest only, not SVM.
+
+VIVA Q&A
+Q: What is genomic data?
+A: Information about an organism's genome, such as DNA sequences, genetic variants or gene-expression measurements.
+
+Q: What is machine learning classification?
+A: A supervised learning task that learns from labelled examples to predict categories for new samples.
+
+Q: Which dataset is used?
+A: The built-in Breast Cancer Wisconsin diagnostic dataset from scikit-learn.
+
+Q: What does the model predict?
+A: Whether a sample is classified as malignant or benign based on numerical cell-nucleus measurements.
+
+Q: What is Random Forest?
+A: An ensemble learning algorithm that combines multiple decision trees.
+
+Q: What does RandomForestClassifier(100) mean?
+A: It creates a Random Forest with 100 decision trees.
+
+Q: What is SVM?
+A: Support Vector Machine is an algorithm that finds a decision boundary separating classes.
+
+Q: What does kernel="linear" mean?
+A: It uses a linear decision boundary in the input feature space.
+
+Q: What is accuracy?
+A: The proportion of test predictions that are correct.
+
+Q: What is precision?
+A: Of all samples predicted as a class, the proportion that truly belongs to that class.
+
+Q: What is recall?
+A: Of all actual samples in a class, the proportion correctly identified.
+
+Q: What is F1-score?
+A: The harmonic mean of precision and recall.
+
+Q: What is feature importance?
+A: A model-based score estimating how useful a feature was in the Random Forest's tree splits.
+
+Q: Are the top five features confirmed biomarkers?
+A: No. They are predictive features in this model and need independent biological validation.
+
+SHORT VIVA ANSWER:
+"This program applies Random Forest and linear SVM classifiers to the Breast Cancer Wisconsin dataset. It splits the data into training and testing sets, trains both models, compares their accuracy, prints the Random Forest classification report, and displays the five most important features."
+
+EXTRA QUESTIONS
+Q: What is the difference between training and testing data?
+A: Training data fits the model; testing data evaluates it on unseen examples.
+
+Q: Why use random_state=42?
+A: It makes the data split and Random Forest randomness reproducible.
+
+Q: Why is feature scaling useful for SVM?
+A: SVM is sensitive to feature scales, so standardization prevents large-range features from dominating.
+
+Q: What is overfitting?
+A: When a model learns training data too closely and performs poorly on unseen data.
+
+Q: What is the difference between Random Forest and SVM?
+A: Random Forest combines decision trees; SVM learns a separating boundary between classes.
+
+Q: Does feature importance prove causation?
+A: No. It measures predictive contribution in the model, not cause and effect.
