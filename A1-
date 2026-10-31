@@ -1,2 +1,20 @@
-its a1
-makin cahnes 
+#A1-DNA sequence analysis
+import re
+seq = "ATGGCCATTGTAATGGGCCGCTGAAAGGGTGCCCGATAGATGAAATAA"
+
+# GC content
+gc = (seq.count("G") + seq.count("C")) / len(seq) * 100
+print("GC %:", round(gc, 2))
+
+# Transcription and reverse complement
+print("RNA:", seq.replace("T", "U"))
+comp = {"A":"T","T":"A","G":"C","C":"G"}
+print("RevComp:", "".join(comp[b] for b in reversed(seq)))
+
+# Motif search (e.g. TATA, GGG)
+for motif in ["GGG", "ATG"]:
+    print(motif, [m.start() for m in re.finditer(f"(?={motif})", seq)])
+
+# Coding regions (ORFs): ATG ... stop codon, in frame
+for m in re.finditer(r"(?=(ATG(?:...)*?(?:TAA|TAG|TGA)))", seq):
+    print("ORF at", m.start(), ":", m.group(1))
