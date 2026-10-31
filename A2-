@@ -17,3 +17,213 @@ print(df[df["Change"] > 0]["Gene"])
 
 print("Downregulated Genes:")
 print(df[df["Change"] < 0]["Gene"])
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+CODE EXPLAINED
+--------------
+
+1. import pandas as pd
+   - Imports the Pandas library.
+   - Pandas is used for handling and analyzing structured data.
+   - The alias 'pd' makes it easier to call Pandas functions.
+
+2. data = {...}
+   - Creates a Python dictionary containing gene expression data.
+   - "Gene" stores the gene identifiers G1, G2, G3, and G4.
+   - "Control" stores expression values measured in the control condition.
+   - "Treated" stores expression values measured in the treated condition.
+   - Each list contains four values, with each position representing the same gene
+     across the three columns.
+
+3. df = pd.DataFrame(data)
+   - Converts the dictionary into a Pandas DataFrame.
+   - A DataFrame is a two-dimensional table with rows and columns.
+   - Each row represents one gene, while the columns contain its identifier and
+     expression values.
+
+4. df["Change"] = df["Treated"] - df["Control"]
+   - Creates a new column named "Change".
+   - Subtracts the Control expression value from the Treated expression value.
+   - A positive result indicates higher expression in the treated condition.
+   - A negative result indicates lower expression in the treated condition.
+   - A zero result indicates no numerical change.
+
+5. print(df)
+   - Displays the complete DataFrame, including the newly calculated Change column.
+   - This allows us to compare control, treated, and change values for every gene.
+
+6. print("Upregulated Genes:")
+   - Prints a heading for the list of upregulated genes.
+   - Upregulated genes have a higher expression value in the treated condition.
+
+7. print(df[df["Change"] > 0]["Gene"])
+   - Filters the DataFrame to retain only rows where Change is greater than zero.
+   - Selects the Gene column from those filtered rows.
+   - Displays the identifiers of genes whose expression increased.
+
+8. print("Downregulated Genes:")
+   - Prints a heading for the list of downregulated genes.
+   - Downregulated genes have a lower expression value in the treated condition.
+
+9. print(df[df["Change"] < 0]["Gene"])
+   - Filters the DataFrame to retain only rows where Change is less than zero.
+   - Selects and displays the Gene identifiers for those rows.
+   - Genes with no change are not included in this list.
+OUTPUT TO EXPECT
+----------------
+
+The calculated change for each gene is:
+
+- G1: 30 - 10 = +20
+- G2: 10 - 20 = -10
+- G3: 20 - 30 = -10
+- G4: 80 - 40 = +40
+
+Expected output:
+
+  Gene  Control  Treated  Change
+0   G1       10       30      20
+1   G2       20       10     -10
+2   G3       30       20     -10
+3   G4       40       80      40
+
+Upregulated Genes:
+0    G1
+3    G4
+Name: Gene, dtype: object
+
+Downregulated Genes:
+1    G2
+2    G3
+Name: Gene, dtype: object
+
+Note:
+- G1 and G4 are upregulated because their treated expression is greater than
+  their control expression.
+- G2 and G3 are downregulated because their treated expression is lower than
+  their control expression.
+
+
+IMPORTANT NOTES / LIMITATIONS
+-----------------------------
+
+1. This is a simplified demonstration using four manually entered gene expression
+   values. It does not read or process an actual RNA-seq count file.
+
+2. Real RNA-seq differential expression analysis normally requires biological
+   replicates, quality control, read alignment or quantification, normalization,
+   statistical testing, and multiple-testing correction.
+
+3. This program calculates only the raw difference (Treated - Control). It does
+   not calculate fold change, log2 fold change, p-values, or adjusted p-values.
+
+4. A positive or negative difference alone does not establish that a gene is
+   statistically significantly differentially expressed.
+
+5. The expression values are assumed to be directly comparable. In real analysis,
+   appropriate normalization is important before comparing samples.
+
+
+VIVA QUESTIONS AND ANSWERS
+--------------------------
+
+Q1. What is RNA sequencing (RNA-seq)?
+Ans. RNA-seq is a sequencing-based technique used to study and quantify RNA
+     transcripts and gene expression in a biological sample.
+
+Q2. What is differential gene expression?
+Ans. Differential gene expression is the comparison of gene expression levels
+     between two or more conditions, such as control and treated samples.
+
+Q3. What is an upregulated gene?
+Ans. A gene is called upregulated when its expression level is higher in the
+     treated condition than in the control condition.
+
+Q4. What is a downregulated gene?
+Ans. A gene is called downregulated when its expression level is lower in the
+     treated condition than in the control condition.
+
+Q5. Why is Pandas used in this program?
+Ans. Pandas is used to organize gene expression values into a DataFrame and
+     perform column operations and filtering.
+
+Q6. What is a DataFrame?
+Ans. A DataFrame is a two-dimensional labeled data structure in Pandas,
+     consisting of rows and columns.
+
+Q7. What does the Change column represent?
+Ans. It represents the difference between treated and control expression values,
+     calculated as Treated minus Control.
+
+Q8. What does a positive Change value indicate?
+Ans. It indicates that the gene has a higher expression value in the treated
+     condition and is classified as upregulated in this program.
+
+Q9. What does a negative Change value indicate?
+Ans. It indicates that the gene has a lower expression value in the treated
+     condition and is classified as downregulated in this program.
+
+Q10. What does a Change value of zero indicate?
+Ans. It indicates that the treated and control expression values are equal.
+
+Q11. What is the purpose of Boolean filtering in Pandas?
+Ans. Boolean filtering selects rows that satisfy a condition, such as Change
+     greater than zero or less than zero.
+
+Q12. Does this program perform complete statistical differential expression
+     analysis?
+Ans. No. It only calculates raw expression differences and classifies genes
+     based on the sign of the difference. It does not perform statistical tests.
+
+
+SHORT VIVA ANSWERS
+------------------
+
+1. RNA-seq: A method to measure RNA and gene expression.
+2. Differential expression: Comparing gene expression between conditions.
+3. Upregulated: Expression increases.
+4. Downregulated: Expression decreases.
+5. Pandas: Python library for data analysis.
+6. DataFrame: A table-like data structure.
+7. Change formula: Treated - Control.
+8. Positive change: Upregulated.
+9. Negative change: Downregulated.
+10. Zero change: No numerical difference.
+11. Boolean filtering: Selecting rows using conditions.
+12. Statistical significance: Not calculated by this program.
+
+
+EXTRA QUESTIONS
+---------------
+
+Q1. What is fold change?
+Ans. Fold change is the ratio of expression in one condition to expression in
+     another condition, commonly Treated divided by Control.
+
+Q2. What is log2 fold change?
+Ans. It is the base-2 logarithm of the fold change. Positive values generally
+     indicate increased expression, while negative values indicate decreased
+     expression, assuming Treated/Control is used.
+
+Q3. Why are biological replicates important in RNA-seq?
+Ans. Biological replicates help estimate natural biological variation and make
+     statistical conclusions more reliable.
+
+Q4. What is normalization in RNA-seq?
+Ans. Normalization adjusts for differences such as sequencing depth and
+     composition so that expression measurements can be compared more fairly.
+
+Q5. What is a p-value?
+Ans. A p-value measures how compatible the observed data are with a specified
+     statistical null hypothesis.
+
+Q6. What is an adjusted p-value?
+Ans. It is a p-value corrected for multiple hypothesis testing, helping control
+     false discoveries when many genes are tested.
+
+Q7. Name commonly used tools for RNA-seq differential expression.
+Ans. DESeq2, edgeR, and limma-voom are commonly used tools.
+
+Q8. Can this program identify statistically significant genes?
+Ans. No. It identifies only genes with positive or negative raw differences.
+     Statistical testing and adjusted p-values are needed to identify
+     statistically significant differential expression.
