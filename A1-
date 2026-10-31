@@ -18,3 +18,115 @@ for motif in ["GGG", "ATG"]:
 # Coding regions (ORFs): ATG ... stop codon, in frame
 for m in re.finditer(r"(?=(ATG(?:...)*?(?:TAA|TAG|TGA)))", seq):
     print("ORF at", m.start(), ":", m.group(1))
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+CODE EXPLAINED
+1. import re
+   Imports Python's regular-expression module for pattern searching.
+
+2. seq = "..."
+   Stores the DNA sequence. DNA contains four bases: A (adenine), T (thymine), G (guanine), and C (cytosine).
+
+3. seq.count("G") and seq.count("C")
+   Count the guanine and cytosine bases.
+
+4. gc = (...) / len(seq) * 100
+   Calculates GC percentage: (number of G + number of C) / total sequence length x 100.
+
+5. round(gc, 2)
+   Rounds the GC percentage to two decimal places.
+
+6. seq.replace("T", "U")
+   Performs a simplified transcription by replacing thymine (T) with uracil (U).
+
+7. comp = {"A":"T","T":"A","G":"C","C":"G"}
+   Defines complementary DNA base pairs: A-T and G-C.
+
+8. reversed(seq)
+   Reads the DNA sequence from end to beginning.
+
+9. "".join(comp[b] for b in reversed(seq))
+   Reverses the sequence, converts each base to its complement, and joins the bases to create the reverse complement.
+
+10. for motif in ["GGG", "ATG"]:
+    Loops through the two DNA motifs to be searched.
+
+11. re.finditer(f"(?={motif})", seq)
+    Finds motif occurrences. The positive lookahead (?=...) allows overlapping matches.
+
+12. [m.start() for m in ...]
+    Collects the starting index of each match. Python indexing starts from zero.
+
+13. r"(?=(ATG(?:...)*?(?:TAA|TAG|TGA)))"
+    Searches for a candidate sequence beginning with ATG, followed by groups of three bases, and ending with TAA, TAG, or TGA.
+
+14. m.start() and m.group(1)
+    m.start() gives the ORF's starting index; m.group(1) gives the matched sequence.
+
+PIPELINE:
+DNA sequence -> calculate GC percentage -> transcribe to RNA -> generate reverse complement -> search motifs -> search for candidate ORFs.
+
+OUTPUT TO EXPECT:
+GC percentage, RNA sequence, reverse complement, positions of GGG and ATG motifs, and any candidate ORFs found.
+
+IMPORTANT NOTES:
+- The code assumes the sequence contains only uppercase A, T, G and C; it does not validate input.
+- Motif positions are zero-based.
+- The reverse complement is DNA, not RNA.
+- This is a simplified ORF pattern search, not a complete biological ORF finder. A robust ORF finder should check all reading frames and identify the first in-frame stop codon.
+- The transcription line simply replaces T with U; it does not model the full biological transcription process.
+
+VIVA Q&A
+Q: What is DNA?
+A: Deoxyribonucleic acid, the molecule that stores hereditary information.
+
+Q: What are the four DNA bases?
+A: Adenine, thymine, guanine and cytosine.
+
+Q: What is GC content?
+A: The percentage of bases in a DNA sequence that are G or C.
+
+Q: Why is GC content useful?
+A: It describes sequence composition and is related to DNA stability and melting temperature.
+
+Q: What is transcription?
+A: The process of producing RNA from a DNA template. This code illustrates it by replacing T with U.
+
+Q: What is a reverse complement?
+A: The reversed DNA sequence with each nucleotide replaced by its complementary base.
+
+Q: What is a motif?
+A: A short sequence pattern that may have biological significance.
+
+Q: What is an ORF?
+A: An open reading frame is a candidate coding region that starts with a start codon and ends with an in-frame stop codon.
+
+Q: What is the usual DNA start codon?
+A: ATG.
+
+Q: What are the DNA stop codons?
+A: TAA, TAG and TGA.
+
+Q: What does re.finditer() do?
+A: It returns match objects for occurrences of a regular-expression pattern.
+
+Q: What does m.start() return?
+A: The zero-based starting position of a match.
+
+SHORT VIVA ANSWER:
+"This program analyzes a DNA sequence by calculating GC content, converting DNA to RNA, generating the reverse complement, searching for motifs such as GGG and ATG, and identifying possible ORFs using start and stop codon patterns."
+
+EXTRA QUESTIONS
+Q: What is the difference between DNA and RNA?
+A: DNA contains deoxyribose and thymine; RNA contains ribose and uracil.
+
+Q: What is a codon?
+A: A group of three nucleotides that specifies an amino acid or a stop signal.
+
+Q: What is a reading frame?
+A: A way of dividing a nucleotide sequence into consecutive groups of three. Each strand has three possible reading frames.
+
+Q: Why are ORFs important?
+A: They help identify possible protein-coding regions.
+
+Q: What is the difference between a motif and an ORF?
+A: A motif is a short pattern; an ORF is a longer candidate coding region.
