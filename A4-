@@ -22,7 +22,8 @@ print(imp.sort_values(ascending=False).head(5))
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 CODE EXPLAINED
 1. Import libraries
-   load_breast_cancer loads the dataset; train_test_split splits the data; RandomForestClassifier and SVC are classification models; accuracy_score and classification_report evaluate predictions; pandas handles feature importance values.
+   load_breast_cancer loads the dataset; train_test_split splits the data; RandomForestClassifier and SVC are classification models; accuracy_score and 
+classification_report evaluate predictions; pandas handles feature importance values.
 
 2. data = load_breast_cancer()
    Loads the Breast Cancer Wisconsin diagnostic dataset built into scikit-learn. It contains numerical measurements derived from images of cell nuclei.
@@ -34,7 +35,8 @@ CODE EXPLAINED
    Contains the target class labels: 0 = malignant and 1 = benign.
 
 5. train_test_split(..., test_size=0.2, random_state=42)
-   Splits the data into 80% training and 20% testing. random_state=42 makes the split reproducible. X_tr and y_tr are training features and labels; X_te and y_te are testing features and labels.
+   Splits the data into 80% training and 20% testing. random_state=42 makes the split reproducible. X_tr and y_tr are training features and labels; X_te and 
+   y_te are testing features and labels.
 
 6. RandomForestClassifier(100, random_state=42)
    Creates a Random Forest containing 100 decision trees.
@@ -67,10 +69,12 @@ CODE EXPLAINED
     Sorts feature importance scores from highest to lowest and displays the top five.
 
 PIPELINE:
-Load dataset -> separate features and labels -> split training and testing data -> train Random Forest and linear SVM -> predict test labels -> compare accuracy -> print Random Forest classification report -> rank important features.
+Load dataset -> separate features and labels -> split training and testing data -> train Random Forest and linear SVM -> predict test labels -> compare accuracy
+-> print Random Forest classification report -> rank important features.
 
 OUTPUT TO EXPECT:
-Random Forest accuracy, SVM accuracy, Random Forest precision/recall/F1 classification report, and the five features with the highest Random Forest importance scores. Exact results appear when the code is run.
+Random Forest accuracy, SVM accuracy, Random Forest precision/recall/F1 classification report, and the five features with the highest Random Forest importance 
+scores. Exact results appear when the code is run.
 
 IMPORTANT NOTES:
 - Despite the assignment title, this code uses the Breast Cancer Wisconsin diagnostic dataset, not raw DNA sequences or gene-expression data.
@@ -123,7 +127,8 @@ Q: Are the top five features confirmed biomarkers?
 A: No. They are predictive features in this model and need independent biological validation.
 
 SHORT VIVA ANSWER:
-"This program applies Random Forest and linear SVM classifiers to the Breast Cancer Wisconsin dataset. It splits the data into training and testing sets, trains both models, compares their accuracy, prints the Random Forest classification report, and displays the five most important features."
+"This program applies Random Forest and linear SVM classifiers to the Breast Cancer Wisconsin dataset. It splits the data into training and testing sets, 
+trains both models, compares their accuracy, prints the Random Forest classification report, and displays the five most important features."
 
 EXTRA QUESTIONS
 Q: What is the difference between training and testing data?
