@@ -76,7 +76,8 @@ IMPORTANT NOTES:
 - The code assumes the sequence contains only uppercase A, T, G and C; it does not validate input.
 - Motif positions are zero-based.
 - The reverse complement is DNA, not RNA.
-- This is a simplified ORF pattern search, not a complete biological ORF finder. A robust ORF finder should check all reading frames and identify the first in-frame stop codon.
+- This is a simplified ORF pattern search, not a complete biological ORF finder. A robust ORF finder should check all reading frames and identify the first 
+  in-frame stop codon.
 - The transcription line simply replaces T with U; it does not model the full biological transcription process.
 
 VIVA Q&A
@@ -117,7 +118,8 @@ Q: What does m.start() return?
 A: The zero-based starting position of a match.
 
 SHORT VIVA ANSWER:
-"This program analyzes a DNA sequence by calculating GC content, converting DNA to RNA, generating the reverse complement, searching for motifs such as GGG and ATG, and identifying possible ORFs using start and stop codon patterns."
+"This program analyzes a DNA sequence by calculating GC content, converting DNA to RNA, generating the reverse complement, searching for motifs such as GGG 
+and ATG, and identifying possible ORFs using start and stop codon patterns."
 
 EXTRA QUESTIONS
 Q: What is the difference between DNA and RNA?
